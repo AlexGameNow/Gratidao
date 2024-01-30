@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Aromas de Gratidão</title>
+</head>
+
+<body>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-image: url('Imagens/Fundo.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+			 display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+		background-color: #DA70D6;
+            color: green;
+            text-align: center;
+            padding: 20px;
+			
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        footer {
+        color: white;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Adiciona um fundo transparente para melhor visibilidade do texto */
+    }
+
+        #products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            text-align: center;
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+
+    <header>
+        <h1>Aromas de Gratidão</h1>
+        <p>Explore nossas fragrâncias exclusivas!</p>
+    </header>
+
+    <main>
+        <section id="products">
+            <!-- Lista de produtos será adicionada dinamicamente pelo JavaScript -->
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Jaqueline Martins / Aromas de Gratidão 2024</p>
+        <audio id="backgroundMusic" src="Sound/Fundo.mp3" loop></audio>
+        <button id="toggleMusicButton">Reproduzir/Silenciar</button>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Array de produtos (exemplo)
+            const products = [
+                {
+                    name: 'Asas de Morcego',
+                    price: 19.99,
+                    image: 'Imagens/Morcego.png'
+                },
+                {
+                    name: 'Veneno de Escorpião',
+                    price: 14.99,
+                    image: 'Imagens/Escorpião.png'
+                },
+                // Adicione mais produtos conforme necessário
+            ];
+
+            const productsContainer = document.getElementById('products');
+            const backgroundMusic = document.getElementById('backgroundMusic');
+            const toggleMusicButton = document.getElementById('toggleMusicButton');
+
+            // Adiciona produtos ao DOM
+            products.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.classList.add('product');
+
+                const imageElement = document.createElement('img');
+                imageElement.src = product.image;
+                imageElement.alt = product.name;
+
+                const nameElement = document.createElement('h3');
+                nameElement.textContent = product.name;
+
+                const priceElement = document.createElement('p');
+                priceElement.textContent = `R$ ${product.price.toFixed(2)}`;
+
+                productElement.appendChild(imageElement);
+                productElement.appendChild(nameElement);
+                productElement.appendChild(priceElement);
+
+                productsContainer.appendChild(productElement);
+            });
+
+            // Adiciona evento de clique no botão para controlar a música
+            toggleMusicButton.addEventListener('click', function () {
+                if (backgroundMusic.paused) {
+                    backgroundMusic.play();
+                    toggleMusicButton.textContent = 'Silenciar';
+                } else {
+                    backgroundMusic.pause();
+                    toggleMusicButton.textContent = 'Reproduzir';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
